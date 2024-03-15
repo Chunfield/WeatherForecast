@@ -34,8 +34,6 @@
 
     </div>
 </template>
-
-
 <script>
 import axios from 'axios';
 export default{
@@ -78,7 +76,6 @@ export default{
 .box1-bar1{
     display: flex;
     justify-content: space-between;
-    /* background-color:rgb(0, 0, 0); */
     height: 25px;
     width: 100%;
 }
