@@ -6,6 +6,7 @@
 
 <script>
 import Weather from './components/Weather.vue';
+import * as echarts from 'echarts';
 export default{
 components:{
   Weather
