@@ -2,7 +2,7 @@
   <div class="container">
     <Header></Header>
     <div class="body">
-        <Card></Card>
+        <Card v-if="weatherData&&nowweatherData&&currentweatherData":currentweatherData="currentweatherData" :weather-data="weatherData" :nowweatherData="nowweatherData"></Card>
     </div>
   </div>
 </template>
@@ -12,13 +12,40 @@ import Weather from './components/Weather.vue';
 import Header from './components/Header/index.vue';
 import Card from './components/Card/index.vue';
 import Chart from './components/Chart/index.vue';
+import axios from 'axios';
 export default{
 components:{
   Weather,
   Header,
   Card,
   Chart
-}
+},
+data(){
+        return{
+            weatherData:'',
+            nowweatherData:'',
+            currentweatherData:'',
+        }
+    },
+    mounted(){
+        this.getWeather()
+    },
+    methods:{
+        getWeather(){
+           const response = axios.get('http://v1.yiketianqi.com/api?unescape=1&version=v9&appid=84686773&appsecret=JunYchW8')
+           .then(response => {  
+                this.weatherData = response.data || {};
+                this.nowweatherData = this.weatherData.data?.[0] || {}
+                this.currentweatherData = this.nowweatherData.hours[0] || {};
+                console.log(this.weatherData)
+                console.log(this.nowweatherData)
+                console.log(this.currentweatherData)   
+            })
+            .catch(error => {  
+                console.error('请求天气数据时出错:', error);  
+            }); 
+        },
+    }
 }
 </script>
 
@@ -39,21 +66,4 @@ html,p,body{
   /* background: linear-gradient(rgb(72, 86, 99), rgb(161, 184, 202)); */
 
 }
-/* body{
-  padding: 0;
-  margin: 0;
-  background: linear-gradient(to bottom, rgb(93, 115, 215), rgb(254, 178, 190),rgb(93, 115, 215));
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 600px;
-  
-}
-.Gamezone{
-position: absolute;
-left: 50%;
-top: 50%;
-transform: translate(-50%,-50%);
-width: 650px;
-} */
-
 </style>

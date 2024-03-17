@@ -2,41 +2,52 @@
     <div class="card-container">
         <div class="card-header">
             <div class="card-header-left">
-                <div class="card-city">杭州</div>
-                <div class="card-wea">今天：小雨 8°~17°C</div>
-                <div class="card-win">无持续风向&lt;3级</div>
+                <div class="card-city">{{ weatherData?.city }}</div>
+                <div class="card-wea">今天：{{ currentweatherData?.wea }} {{nowweatherData?.tem2}}°~{{nowweatherData?.tem1}}°C</div>
+                <div class="card-win">{{nowweatherData?.win[0]}}{{nowweatherData?.win_speed}}</div>
             </div>
             <div class="card-header-right">
-                <div class="card-date">03月17日</div>
-                <div class="card-week">周日</div>
-                <div class="card-lunar">农历二月初八</div>
+                <div class="card-date">{{nowweatherData?.date}}</div>
+                <div class="card-week">{{nowweatherData?.week }}</div>
+                <div class="card-lunar"></div>
             </div>
         </div>
         <div class="card-body">
             <div class="card-body-left">
-                <div class="card-tem">16°</div>
+                <div class="card-tem">{{currentweatherData?.tem }}°</div>
             </div>
             <div class="card-body-right">
                 <div class="card-body-rightT">
-                    <div class="card-air">62</div>
-                    <div class="card-airq">良</div>
+                    <div class="card-air">{{nowweatherData?.air }}</div>
+                    <div class="card-airq">{{nowweatherData?.air_level }}</div>
                 </div>
                 <div class="card-body-rightB">
                     <div class="weather-img"><img class="cloudimg" src="../../assets/cloud06.svg"></div>
-                    <div class="card-cld">阴</div>
-                    <div class="card-windir">东北风</div>
-                    <div class="card-winspeed">4级</div>
+                    <div class="card-cld">{{currentweatherData?.wea}}</div>
+                    <div class="card-windir">{{currentweatherData?.win}}</div>
+                    <div class="card-winspeed">{{currentweatherData?.win_speed }}</div>
                 </div>
             </div>
         </div>
         <div class="card-footer">
-            <div class="card-footer-content">湿度67.0%</div>
-            <div class="card-footer-content">紫外线最弱</div>
-            <div class="card-footer-content">日出06:07</div>
-            <div class="card-footer-content">日落18:09</div>
+            <div class="card-footer-content">湿度{{nowweatherData?.humidity}}</div>
+            <div class="card-footer-content">{{nowweatherData?.index[0]?.title}}{{nowweatherData?.index[0]?.level}}</div>
+            <div class="card-footer-content">日出{{ nowweatherData?.sunrise }}</div>
+            <div class="card-footer-content">日落{{ nowweatherData?.sunset }}</div>
         </div>
     </div>
 </template>
+<script>
+export default{
+    
+    mounted(){
+            console.log(this.weatherData)
+            console.log(this.nowweatherData)
+    },
+    props:['weather-data','nowweatherData','currentweatherData']
+    
+}
+</script>
 <style>
 .card-container{
     width: 100%;
@@ -57,9 +68,6 @@
 }
 .card-city{
     font-size: 20px;
-}
-.card-wea{
-  
 }
 .card-header-right{
     display: flex;
@@ -85,7 +93,7 @@
     margin-top: 20px;
     margin-left: 30px;
     height: 53px;
-    width: 140px;
+    width: 200px;
     overflow: hidden;
 }
 .card-body-rightT{
@@ -106,16 +114,18 @@
     font-size: 14px;
     margin-top: 10px;
     height: 22px;
-    width: 140px;
+    width: 200px;
     overflow: hidden;
 }
 .weather-img{
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
+    transform: translateX(30%);
 }
 .cloudimg{
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
+    transform: scale(1.5);
 }
 .card-footer{
     display: flex;
