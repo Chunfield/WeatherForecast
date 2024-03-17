@@ -1,21 +1,45 @@
 <template>
-  <div class="Gamezone">
-    <Weather></Weather>
+  <div class="container">
+    <Header></Header>
+    <div class="body">
+        <Card></Card>
+    </div>
   </div>
 </template>
 
 <script>
 import Weather from './components/Weather.vue';
-import * as echarts from 'echarts';
+import Header from './components/Header/index.vue';
+import Card from './components/Card/index.vue';
+import Chart from './components/Chart/index.vue';
 export default{
 components:{
-  Weather
+  Weather,
+  Header,
+  Card,
+  Chart
 }
 }
 </script>
 
 <style>
-body{
+html,p,body{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    width: 100%;
+    min-height: 600px;
+    background: linear-gradient(rgb(72, 86, 99), rgb(161, 184, 202));
+}
+.body{
+  width: 895px;
+  margin: 0 auto;
+  /* background-color: black; */
+  /* background: linear-gradient(rgb(72, 86, 99), rgb(161, 184, 202)); */
+
+}
+/* body{
   padding: 0;
   margin: 0;
   background: linear-gradient(to bottom, rgb(93, 115, 215), rgb(254, 178, 190),rgb(93, 115, 215));
@@ -29,13 +53,7 @@ position: absolute;
 left: 50%;
 top: 50%;
 transform: translate(-50%,-50%);
-}
-.title{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-weight: 900;
-  font-size: 32px;
-}
+width: 650px;
+} */
+
 </style>
