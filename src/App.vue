@@ -3,19 +3,18 @@
     <Header></Header>
     <div class="body">
         <Card v-if="weatherData&&nowweatherData&&currentweatherData":currentweatherData="currentweatherData" :weather-data="weatherData" :nowweatherData="nowweatherData"></Card>
+        <Chart v-if="weatherData&&nowweatherData&&currentweatherData":currentweatherData="currentweatherData" :weather-data="weatherData" :nowweatherData="nowweatherData" :nextWeek="nextweek"></Chart>
     </div>
   </div>
 </template>
 
 <script>
-import Weather from './components/Weather.vue';
 import Header from './components/Header/index.vue';
 import Card from './components/Card/index.vue';
 import Chart from './components/Chart/index.vue';
 import axios from 'axios';
 export default{
 components:{
-  Weather,
   Header,
   Card,
   Chart
@@ -25,6 +24,7 @@ data(){
             weatherData:'',
             nowweatherData:'',
             currentweatherData:'',
+            nextweek:[],
         }
     },
     mounted(){
@@ -37,9 +37,11 @@ data(){
                 this.weatherData = response.data || {};
                 this.nowweatherData = this.weatherData.data?.[0] || {}
                 this.currentweatherData = this.nowweatherData.hours[0] || {};
-                console.log(this.weatherData)
-                console.log(this.nowweatherData)
-                console.log(this.currentweatherData)   
+                for(let i=0;i<7;i++){
+                    this.nextweek.push(this.weatherData.data[i])
+                }
+               
+                console.log(this.nextweek) 
             })
             .catch(error => {  
                 console.error('请求天气数据时出错:', error);  
