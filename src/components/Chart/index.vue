@@ -1,5 +1,7 @@
 <template>
-    <div class="charts" ref="chart"></div>
+    <div class="charts" ref="chart">
+        <button  class="ar"></button>
+    </div>
 </template>
 <script>
 import * as echarts from 'echarts';
@@ -54,14 +56,24 @@ export default{
                         }
                     }  
                 },
-                
+                dataZoom: [  
+        {  
+            type: 'slider',   
+            start: 10,  
+            end: 60 
+        },  
+        {  
+            type: 'inside', 
+            start: 10,  
+            end: 60  
+        }  
+    ]  ,
                 series: [{  
                     name: '气温图',  
                     type: 'line',
                     smooth:'true',
                     symbol: 'circle',
                     symbolSize:6,
-
                     areaStyle: {
                     color: 'rgba(64, 60, 60, 0.3)',
                     opacity: 0.5
@@ -89,5 +101,9 @@ export default{
 .charts{
     height:250px;
     width: 100%;
+}
+.ar{
+    height: 50px;
+    width: 50px;
 }
 </style>
