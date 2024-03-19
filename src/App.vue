@@ -64,7 +64,7 @@ html,p,body{
 .body{
   width: 895px;
   margin: 0 auto;
-  /* background-color: black; */
+  
   /* background: linear-gradient(rgb(72, 86, 99), rgb(161, 184, 202)); */
 
 }

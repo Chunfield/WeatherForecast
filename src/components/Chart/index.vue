@@ -1,14 +1,17 @@
 <template>
-    <div class="charts" ref="chart">
-        <button  class="ar"></button>
+    <div class="green">
+        <div class="charts" ref="chart"></div>
+        <button @click="handleLeftButtonClick" class="ar">←</button>
     </div>
 </template>
+
 <script>
 import * as echarts from 'echarts';
 export default{
     data(){
         return{
             chart:'',
+            temdata:[this.nextWeek[0]?.tem,this.nextWeek[1]?.tem,this.nextWeek[2]?.tem,this.nextWeek[3]?.tem,this.nextWeek[4]?.tem,this.nextWeek[5]?.tem,this.nextWeek[6]?.tem,],
         }
     },
     props:['weather-data','nowweatherData','currentweatherData','nextWeek'],
@@ -56,24 +59,31 @@ export default{
                         }
                     }  
                 },
-                dataZoom: [  
-        {  
-            type: 'slider',   
-            start: 10,  
-            end: 60 
-        },  
-        {  
-            type: 'inside', 
-            start: 10,  
-            end: 60  
-        }  
-    ]  ,
+    //             dataZoom: [  
+    //     {  
+    //         type: 'slider',   
+    //         start: 10,  
+    //         end: 60 
+    //     },  
+    //     {  
+    //         type: 'inside', 
+    //         start: 10,  
+    //         end: 60  
+    //     }  
+    // ],
+                tooltip: {  
+                    trigger: 'item', 
+                    axisPointer: {  
+                    type: 'line'  
+                                },
+                        },  
+    
                 series: [{  
-                    name: '气温图',  
+                    name: '温度',  
                     type: 'line',
                     smooth:'true',
                     symbol: 'circle',
-                    symbolSize:6,
+                    symbolSize:9,
                     areaStyle: {
                     color: 'rgba(64, 60, 60, 0.3)',
                     opacity: 0.5
@@ -88,7 +98,7 @@ export default{
                         color: '#fff',
                         width:1
                     },
-                    data: [this.nextWeek[0]?.tem,this.nextWeek[1]?.tem,this.nextWeek[2]?.tem,this.nextWeek[3]?.tem,this.nextWeek[4]?.tem,this.nextWeek[5]?.tem,this.nextWeek[6]?.tem,]  
+                    data: [this.temdata[0],this.temdata[1],this.temdata[2],this.temdata[3],this.temdata[4],this.temdata[5],this.temdata[6],]  
                         }]  
             }
             this.chart.setOption(option);
@@ -102,7 +112,11 @@ export default{
     height:250px;
     width: 100%;
 }
+.green{
+    background-color: green;
+}
 .ar{
+    position: absolute;
     height: 50px;
     width: 50px;
 }
