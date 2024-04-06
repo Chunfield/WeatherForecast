@@ -23,9 +23,13 @@ html,p,body{
     display: flex;
 }
 .header-title{
+    display: flex;
+    align-items: end;
+    padding-left: 10px;
     font-family: 'alimama';
     font-size: 20px;
     color: rgb(53, 140, 227);
+
 }
 .header-logo{
     height: 30px;

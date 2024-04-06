@@ -4,6 +4,7 @@
     <div class="body">
         <Card v-if="weatherData&&nowweatherData&&currentweatherData":currentweatherData="currentweatherData" :weather-data="weatherData" :nowweatherData="nowweatherData"></Card>
         <Chart v-if="weatherData&&nowweatherData&&currentweatherData":currentweatherData="currentweatherData" :weather-data="weatherData" :nowweatherData="nowweatherData" :nextWeek="nextweek"></Chart>
+
     </div>
   </div>
 </template>
@@ -64,7 +65,7 @@ html,p,body{
 .body{
   width: 895px;
   margin: 0 auto;
-  
+  min-height: 680px;
   /* background: linear-gradient(rgb(72, 86, 99), rgb(161, 184, 202)); */
 
 }
